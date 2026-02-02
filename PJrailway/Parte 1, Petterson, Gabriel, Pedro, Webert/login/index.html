@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Alpha</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="teste">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    
+    <a href="/Parte 1, Petterson, Gabriel, Pedro, Webert/Página Inicial/"><img src="/Parte 1, Petterson, Gabriel, Pedro, Webert/Página Inicial/motanha.png" alt=""></a>
+   
+    <div class="container">
+        <h1>Seja um de nós!</h1>
+
+        <!-- Formulário de Registro -->
+        <div id="registro-form" class="form-container">
+            <h2>Realize seu cadastro para desfrutar das vantagens!</h2>
+            <form id="formRegistro">
+                <input type="text" id="nome" placeholder="Nome" required>
+                <input type="tel" id="telefone" placeholder="Telefone" required>
+
+                <input type="password" id="senha" placeholder="Senha" required>
+                <input type="password" id="confirmarSenha" placeholder="Confirmar senha" required>
+                <button type="submit">Cadastrar</button>
+            </form>
+            <p>Já tem conta? <a href="#" onclick="mostrarLogin()">Fazer Login</a></p>
+        </div>
+
+        <!-- Formulário de Login -->
+        <div id="login-form" class="form-container" style="display: none;">
+            <h2>Login</h2>
+            <form id="formLogin">
+                <input type="tel" id="loginTelefone" placeholder="Telefone cadastrado" required>
+                <input type="password" id="loginSenha" placeholder="Sua senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <p>Não tem conta? <a href="#" onclick="mostrarRegistro()">Cadastrar</a></p>
+        </div>
+
+        <!-- Área Logada -->
+        <div id="area-logada" class="form-container" style="display: none;">
+            <h2>Bem-vindo!</h2>
+            <div id="dados-usuario"></div>
+            <button onclick="sair()">Sair</button>
+        </div>
+
+        <!-- Mensagens -->
+        <div id="mensagem"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

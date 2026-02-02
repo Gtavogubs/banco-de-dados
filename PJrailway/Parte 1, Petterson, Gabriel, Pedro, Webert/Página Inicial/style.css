@@ -1,0 +1,528 @@
+/* ==============================
+   RESET E CONFIGURAÇÕES GLOBAIS
+   ============================== */
+
+/* Remove margens, paddings e define box-sizing padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configurações gerais do body */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+footer{
+    color: white;
+    font-weight: bold;
+    height: 0%;
+    background: black ;
+    text-align: center;
+}
+
+/* Container centralizado com largura máxima */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==============================
+   HEADER E NAVEGAÇÃO
+   ============================== */
+
+/* Barra fixa superior */
+.navbar {
+    background: rgba(0, 0, 0, 0.9);      /* fundo semi-transparente */
+    backdrop-filter: blur(10px);         /* efeito blur */
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;                    /* fixa no topo */
+    top: 0;
+    z-index: 100;                        /* fica acima de tudo */
+    width: 100%;
+}
+
+/* Container interno da navbar */
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    position: relative;
+}
+
+/* Marca (nome do site) */
+.nav-brand {
+    display: flex;
+    align-items: baseline;
+    gap: px;
+    position: absolute;
+    left: 0;
+}
+
+/* Estilo do nome principal */
+.nav-brand h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.gym-text {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Lista de links do menu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+    margin: 0 auto;
+}
+
+/* Logo pequeno (Montanha) */
+#Montanha {
+    height: 26px;
+    width: auto;
+}
+
+/* Estilo dos links do menu */
+.nav-menu a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+/* Efeito hover e link ativo */
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #f39c12;
+}
+
+/* ==============================
+   (Página inicial)
+   ============================== */
+
+.hero {
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    text-align: left;
+    padding: 8rem 2rem;
+    min-height: 100vh;                   /* ocupa tela toda */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden; /* 🔥 impede scroll e corta vazamentos */
+}
+
+/* Blur SOMENTE na imagem da .hero */
+.hero::before {
+    
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: url("Fundo pág Inicial.png.png") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+
+    filter: blur(5px);
+    transform: scale(1.1); /* aumenta só um pouco */
+    z-index: -1;
+}
+
+
+
+/* Conteúdo da seção hero */
+.hero-content {
+    max-width: 600px;
+    margin-left: 5%;
+}
+
+/* Título principal */
+.hero-title {
+    font-size: 5rem;
+    font-weight: bold;
+    line-height: 0.9;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+    color: #ffffff;
+}
+
+/* Subtítulo */
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Texto informativo */
+.hero-description {
+    font-size: 1rem;
+    opacity: 0.9;
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    text-align: right;
+    width: 40%;
+}
+
+/* ==============================
+   PÁGINA TREINOS
+   ============================== */
+
+.training-section {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                url("FundoPágTreino.png") center/cover fixed;
+    padding: 4rem 0;
+    color: white;
+    min-height: 100vh;
+}
+
+/* Layout em grid */
+.training-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+}
+
+/* Título */
+.training-title {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Descrição */
+.training-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* Caixas de informações */
+.training-info {
+    margin-bottom: 3rem;
+}
+
+.training-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.training-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Botões */
+.btn {
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Botão principal */
+.btn-primary {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* Botão secundário */
+.btn-secondary {
+    background-color: transparent;
+    color: #e74c3c;
+    border: 2px solid #e74c3c;
+}
+
+.btn-secondary:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Caixa de benefícios */
+.benefits-box {
+    background: rgba(255,255,255,0.95);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* Lista de benefícios */
+.benefits-list li {
+    padding: 0.8rem 0;
+    padding-left: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* Marca de check */
+.benefits-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #e74c3c;
+}
+
+/* ==============================
+   PÁGINA CALCULADORA IMC
+   ============================== */
+
+.imc-section {
+    background: url("Fundo IMC(1).png") no-repeat center/cover;
+}
+
+/* Título do IMC */
+.imc-title {
+    font-size: 2.5rem;
+    color: #f39c12;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-weight: bold;
+}
+
+/* Caixa da calculadora */
+.imc-calculator {
+    max-width: 500px;
+    margin: auto;
+    background: rgba(0,0,0,0.7);
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+/* Campo de entrada */
+.input-group {
+    margin-bottom: 3rem;
+}
+
+/* Label */
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+/* Input */
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+/* Resultado IMC */
+.resultado {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Informações dos níveis de IMC */
+.imc-info {
+    max-width: 600px;
+    margin: auto;
+    background: rgba(0,0,0,0.7);
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+/* ==============================
+   RESPONSIVIDADE
+   ============================== */
+
+@media (max-width: 768px) {
+
+    /* Colapsa navbar */
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-menu {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    /* Ajuste de textos */
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    /* Conteúdo de treino */
+    .training-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ==============================
+   ABAS DE TREINO
+   ============================== */
+
+.training-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+/* Botões das abas */
+.tab-button {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Aba ativa */
+.tab-button.active {
+    background: rgba(243,156,18,0.9);
+    color: white;
+}
+
+/* ==============================
+   LOJA
+   ============================== */
+
+.shop-section {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    padding: 4rem 0;
+    color: white;
+}
+
+.shop-title {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #f39c12;
+}
+
+/* Filtros */
+.category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.filter-btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+}
+
+/* Grid de produtos */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Card de produto */
+.product-card {
+    background: rgba(0,0,0,0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Imagem do produto */
+.product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+/* Informações do produto */
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-price {
+    color: #f39c12;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* ==============================
+   CHECKOUT
+   ============================== */
+
+.checkout-section {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    padding: 4rem 0;
+    color: white;
+}
+
+.checkout-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #f39c12;
+}
+
+/* Layout do checkout */
+.checkout-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+}
+
+/* Formulário */
+.checkout-form {
+    background: rgba(0,0,0,0.7);
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: white;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+/* Resumo de compra */
+.checkout-summary {
+    background: rgba(0,0,0,0.7);
+    padding: 2rem;
+    border-radius: 15px;
+}

@@ -1,0 +1,128 @@
+/* ==============================
+   RESET E CONFIGURAÇÕES GLOBAIS
+   ============================== */
+
+/* Remove margens, paddings e define box-sizing padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configurações gerais do body */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+footer {
+    height: 0%;
+    background: linear-gradient(135deg, #b8a4ff, #ca2828);
+    text-align: center;
+}
+
+/* Container centralizado com largura máxima */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==============================
+   HEADER E NAVEGAÇÃO
+   ============================== */
+
+/* Barra fixa superior */
+.navbar {
+    background: rgba(0, 0, 0, 0.9);
+    /* fundo semi-transparente */
+    backdrop-filter: blur(10px);
+    /* efeito blur */
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    /* fixa no topo */
+    top: 0;
+    z-index: 100;
+    /* fica acima de tudo */
+    width: 100%;
+}
+
+/* Container interno da navbar */
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    position: relative;
+}
+footer {
+    height: 3%;
+    color: white;
+    font-weight: bold;
+    background: black;
+    text-align: center;
+    position: fixed; /* Fixa o elemento em relação à tela */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+/* Marca (nome do site) */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    position: absolute;
+    left: 0;
+}
+
+/* Estilo do nome principal */
+.nav-brand h1 {
+    font-size: 1.8rem;      /* Define o tamanho para não estourar */
+    font-weight: bold;      /* Mantém o peso visual */
+    color: white;           /* Garante a visibilidade */
+    text-shadow: none;      /* Limpa a sombra se desejar */
+    letter-spacing: normal; /* Mantém a leitura limpa */
+    line-height: 1;         /* Evita que o texto empurre a caixa para cima ou para baixo */
+}
+.gym-text {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Lista de links do menu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+    margin: 0 auto;
+}
+
+/* Logo pequeno (Montanha) */
+#Montanha {
+    height: 26px;
+    width: auto;
+}
+
+/* Estilo dos links do menu */
+.nav-menu a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+/* Efeito hover e link ativo */
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #f39c12;
+}
+

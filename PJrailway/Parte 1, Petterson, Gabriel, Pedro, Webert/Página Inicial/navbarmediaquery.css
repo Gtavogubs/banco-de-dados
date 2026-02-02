@@ -1,0 +1,51 @@
+@media (max-width: 768px) {
+    .navbar-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    .nav-menu li {
+        list-style: none;
+    }
+
+    .nav-menu li a {
+        font-size: 14px;
+    }
+
+    #Montanha {
+        order: -1;
+        margin-bottom: 10px;
+        max-height: 40px;
+    }
+
+    .container-login {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .botao-login {
+        width: 90%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .aba-login {
+        right: 5%;
+        left: 5%;
+        width: 90%;
+        min-width: unset;
+        top: 100%;
+    }
+}
