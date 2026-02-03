@@ -1,56 +1,61 @@
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
-const path = require("path"); // Importante para gerenciar pastas na nuvem
+const path = require("path");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'Página Inicial')));
 
-// Serve os arquivos da pasta 'Página Inicial'
-// Usar path.join garante que o caminho funcione tanto em Windows quanto no Linux da Railway
-app.use(express.static(path.join(__dirname, 'Página Inicial'))); 
-
-// CONFIGURAÇÃO DA CONEXÃO
-// Na Railway, você usará a variável MYSQL_URL que eles fornecem.
-// Se não houver essa variável (ex: no seu PC), ele usa os dados locais.
-const db = mysql.createConnection(process.env.MYSQL_URL || {
+const dbConfig = process.env.MYSQL_URL || {
     host: "localhost",
     user: "root",
-    password: "", // Sua senha local
+    password: "",
     database: "alpha_gym"
+};
+
+const connection = mysql.createConnection(dbConfig);
+
+connection.connect((err) => {
+    if (err) return console.error(err.message);
+    
+    connection.query("CREATE DATABASE IF NOT EXISTS alpha_gym", (err) => {
+        if (err) return console.error(err);
+        
+        connection.query("USE alpha_gym", (err) => {
+            if (err) return console.error(err);
+            
+            const createTable = `
+                CREATE TABLE IF NOT EXISTS usuarios (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    nome VARCHAR(255) NOT NULL,
+                    email VARCHAR(255) NOT NULL UNIQUE,
+                    senha VARCHAR(255) NOT NULL
+                )`;
+            
+            connection.query(createTable, (err) => {
+                if (err) console.error(err);
+                else console.log("Database e Tabela prontas!");
+            });
+        });
+    });
 });
 
-db.connect((err) => {
-    if (err) {
-        console.error("❌ Erro ao conectar ao banco:", err.message);
-        return;
-    }
-    console.log("✅ Conexão estabelecida com o MySQL!");
-});
-
-// ROTA: Cadastro de Usuários
 app.post("/usuarios", (req, res) => {
     const { nome, email, senha } = req.body;
     const sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
-    
-    db.query(sql, [nome, email, senha], (err, result) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ error: "Erro ao cadastrar. E-mail já existe?" });
-        }
+    connection.query(sql, [nome, email, senha], (err, result) => {
+        if (err) return res.status(500).json({ error: "Erro ao cadastrar" });
         res.json({ message: "Conta criada!", id: result.insertId });
     });
 });
 
-// ROTA: Login
 app.post("/login", (req, res) => {
     const { email, senha } = req.body;
     const sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
-    
-    db.query(sql, [email, senha], (err, results) => {
+    connection.query(sql, [email, senha], (err, results) => {
         if (err) return res.status(500).json(err);
-        
         if (results.length > 0) {
             res.json({ message: "Sucesso!", user: results[0] });
         } else {
@@ -59,9 +64,7 @@ app.post("/login", (req, res) => {
     });
 });
 
-// PORTA DINÂMICA
-// A Railway define a porta automaticamente na variável process.env.PORT
-const PORT = process.env.PORT || 3001; 
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor rodando na porta ${PORT}`);
+    console.log(`🚀 Servidor na porta ${PORT}`);
 });
