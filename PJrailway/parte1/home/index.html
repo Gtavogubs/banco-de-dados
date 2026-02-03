@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Gym - Sua Plataforma Completa de Treino, Saúde e Nutrição</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="navbarmediaquery.css">
+    <link rel="icon" href="/PJrailway/favicon/favicon-32x32.png" type="">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-content">
+                <div class="nav-brand">
+                    <h1>Alpha</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/PJrailway/parte1/home/index.html">INÍCIO</a></li>
+                    <li><a href="/PJrailway/parte2/Treinos/PJintregador2.html">TREINOS</a></li>
+                    <li><a href="/PJrailway/parte2/IMC/index.html">CALCULADORA (IMC)</a></li>
+                    <li><a href="/PJrailway/parte1/Loja/loja.html">LOJA</a></li>
+                    <li><a href="/PJrailway/parte1/Premium/premium.html">ÁREA PREMIUM</a></li>
+                    <li><a href="/PJrailway/parte1/Nutricionista/nutricionista.html">NUTRICIONISTA</a></li>
+                    <li><a href="/PJrailway/parte1/sobre/sobre.html">SOBRE</a></li>
+                </ul>
+
+                <img id="Montanha" src="motanha.png" alt="">
+
+                <div class="container-login">
+                    <a href="#" class="botao-login">Minha Conta</a>
+                    <div class="aba-login">
+                        <form onsubmit="fazerLogin(event)">
+                            <p class="titulo-aba">Login</p>
+                            <input type="email" id="loginEmail" placeholder="E-mail" required>
+                            <input type="password" id="loginSenha" placeholder="Senha" required>
+                            <button type="submit" class="btn-principal">Entrar</button>
+                        </form>
+
+                        <hr class="divisor">
+
+                        <form onsubmit="criarConta(event)">
+                            <p class="titulo-aba">Criar Conta</p>
+                            <input type="text" id="regNome" placeholder="Nome Completo" required>
+                            <input type="email" id="regEmail" placeholder="E-mail" required>
+                            <input type="password" id="regSenha" placeholder="Crie uma Senha" required>
+                            <button type="submit" class="btn-secundario">Cadastrar-se</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Alpha<br>Gym</h1>
+                <h2 class="hero-subtitle">SUA PLATAFORMA COMPLETA DE TREINO, SAÚDE E NUTRIÇÃO</h2>
+            </div>
+            <p class="hero-description">A NÚMERO 1 EM SOLUÇÕES FITNESS. SEU PROGRESSO É O NOSSO PROPÓSITO.</p>
+        </section>
+    </main>
+    <footer>
+        <h4> Alpha Gym &COPY; 2025-2026</h4>
+    </footer>
+
+    <script>
+        const API = "http://localhost:3001";
+
+        
+        async function criarConta(event) {
+            event.preventDefault(); 
+            const inputs = document.querySelectorAll('.aba-login form:last-of-type input');
+            const nome = inputs[0].value;
+            const email = inputs[1].value;
+            const senha = inputs[2].value;
+
+            const response = await fetch(`${API}/usuarios`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, email, senha })
+            });
+            const data = await response.json();
+            alert(data.message);
+        }
+
+       
+        async function fazerLogin(event) {
+            event.preventDefault();
+            const inputs = document.querySelectorAll('.aba-login form:first-of-type input');
+            const email = inputs[0].value;
+            const senha = inputs[1].value;
+
+            const response = await fetch(`${API}/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, senha })
+            });
+            const data = await response.json();
+            alert(data.message);
+        }
+
+        
+        document.querySelector(".btn-secundario").onclick = criarConta;
+        document.querySelector(".btn-principal").onclick = fazerLogin;
+    </script>
+</body>
+
+</html>
