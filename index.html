@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionando...</title>
+    <style>
+        /* Um estilo simples para a página não ficar em branco */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Encaminhando você...</h1>
+        <p>Em instantes você será levado para a nova página.</p>
+        <p>Caso não funcione, <a id="link" href="/PJrailway/Parte 1, Petterson, Gabriel, Pedro, Webert/Página Inicial/index.html">clique aqui</a>.</p>
+    </div>
+
+    <script>
+        // Configurações
+        const destino = "/PJrailway/Parte 1, Petterson, Gabriel, Pedro, Webert/Página Inicial/index.html"; // Altere para a sua URL
+        const tempoEspera = 3000; // Tempo em milissegundos (3000ms = 3 segundos)
+
+        // Função de redirecionamento
+        setTimeout(() => {
+            // window.location.replace é melhor que .href pois não salva a página de 
+            // redirecionamento no histórico, evitando loops ao clicar em "voltar".
+            window.location.replace(destino);
+        }, tempoEspera);
+    </script>
+
+</body>
+</html>
