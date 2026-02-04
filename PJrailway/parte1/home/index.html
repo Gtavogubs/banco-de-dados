@@ -24,7 +24,8 @@
                     <li><a href="/banco-de-dados/PJrailway/parte2/IMC/index.html">CALCULADORA (IMC)</a></li>
                     <li><a href="/banco-de-dados/PJrailway/parte1/Loja/loja.html">LOJA</a></li>
                     <li><a href="/banco-de-dados/PJrailway/parte1/Premium/premium.html">ÁREA PREMIUM</a></li>
-                    <li><a href="/banco-de-dados/PJrailway/parte1/Nutricionista/nutricionista.html">NUTRICIONISTA</a></li>
+                    <li><a href="/banco-de-dados/PJrailway/parte1/Nutricionista/nutricionista.html">NUTRICIONISTA</a>
+                    </li>
                     <li><a href="/banco-de-dados/PJrailway/parte1/sobre/sobre.html">SOBRE</a></li>
                 </ul>
 
@@ -70,44 +71,94 @@
     </footer>
 
     <script>
+        // Configuração da API (Troque pelo link do Railway quando fizer o deploy)
         const API = "http://localhost:3001";
 
-        
+        // --- FUNÇÃO PARA ATUALIZAR A INTERFACE ---
+        function atualizarInterfaceLogado() {
+            const usuarioSalvo = localStorage.getItem("usuarioNome");
+            const botaoLogin = document.querySelector(".botao-login");
+            const abaLogin = document.querySelector(".aba-login");
+
+            if (usuarioSalvo) {
+                // 1. Muda o texto do botão para o nome (pega apenas o primeiro nome)
+                const primeiroNome = usuarioSalvo.split(' ')[0];
+                botaoLogin.innerHTML = `Olá, ${primeiroNome} <span style="color: red; margin-left:10px;">(Sair)</span>`;
+
+                // 2. Transforma o botão em Logout
+                botaoLogin.onclick = (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem("usuarioNome");
+                    window.location.reload(); // Recarrega para voltar ao estado original
+                };
+
+                // 3. Esconde o formulário se o usuário clicar no botão enquanto logado
+                abaLogin.style.display = "none";
+            }
+        }
+
+        // --- FUNÇÃO DE CADASTRO ---
         async function criarConta(event) {
-            event.preventDefault(); 
+            event.preventDefault();
             const inputs = document.querySelectorAll('.aba-login form:last-of-type input');
             const nome = inputs[0].value;
             const email = inputs[1].value;
             const senha = inputs[2].value;
 
-            const response = await fetch(`${API}/usuarios`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nome, email, senha })
-            });
-            const data = await response.json();
-            alert(data.message);
+            try {
+                const response = await fetch(`${API}/usuarios`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ nome, email, senha })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Conta criada com sucesso! Você já está logado.");
+                    localStorage.setItem("usuarioNome", nome); // Salva o nome direto no cadastro
+                    atualizarInterfaceLogado();
+                } else {
+                    alert(data.error || "Erro ao criar conta");
+                }
+            } catch (err) {
+                console.error("Erro na requisição:", err);
+            }
         }
 
-       
+        // --- FUNÇÃO DE LOGIN ---
         async function fazerLogin(event) {
             event.preventDefault();
             const inputs = document.querySelectorAll('.aba-login form:first-of-type input');
             const email = inputs[0].value;
             const senha = inputs[1].value;
 
-            const response = await fetch(`${API}/login`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, senha })
-            });
-            const data = await response.json();
-            alert(data.message);
+            try {
+                const response = await fetch(`${API}/login`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, senha })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    // No seu server.js você envia 'user: results[0]', então acessamos 'data.user.nome'
+                    localStorage.setItem("usuarioNome", data.user.nome);
+                    atualizarInterfaceLogado();
+                    alert("Bem-vindo de volta!");
+                } else {
+                    alert(data.message);
+                }
+            } catch (err) {
+                console.error("Erro na requisição:", err);
+            }
         }
 
-        
-        document.querySelector(".btn-secundario").onclick = criarConta;
-        document.querySelector(".btn-principal").onclick = fazerLogin;
+        // Inicializar eventos e verificar login ao carregar a página
+        document.addEventListener("DOMContentLoaded", () => {
+            atualizarInterfaceLogado();
+            document.querySelector(".aba-login form:last-of-type").onsubmit = criarConta;
+            document.querySelector(".aba-login form:first-of-type").onsubmit = fazerLogin;
+        });
     </script>
 </body>
 
