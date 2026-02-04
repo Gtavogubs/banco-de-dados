@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors());
+app.options("*", cors());
 app.use(express.json());
 
 // 🔴 CONEXÃO SOMENTE VIA RAILWAY
@@ -66,6 +66,7 @@ app.post("/login", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
